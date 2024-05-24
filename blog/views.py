@@ -5,6 +5,7 @@ from .models import Post
 # Create your views here.
 class DoctorList(generic.ListView):
     queryset = Post.objects.filter(status=1)
-    template_name = "doctor_list.html"
+    template_name = "blog/index.html"
+    paginate_by = 6
 
 
