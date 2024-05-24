@@ -25,7 +25,6 @@ class Post(models.Model):
     categories = models.ManyToManyField(Category)
     status = models.IntegerField(choices=STATUS, default=0)
     updated_on = models.DateTimeField(auto_now=True)
-    categories = models.ManyToManyField(Category)
     excerpt = models.TextField(blank=True)
     class Meta:
         ordering = ["-created_on"]

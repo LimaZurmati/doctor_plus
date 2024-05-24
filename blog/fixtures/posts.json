@@ -1,0 +1,66 @@
+
+[
+    {
+        "model": "blog.post",
+        "pk": null,
+        "fields": {
+            "title": "Dr Mirza Mohmmad Nijrabi",
+            "slug": "Dr-Mirza-Mohmmad-Nijrabi",
+            "author": 1,
+            "content": "Consultant General & Endosurgeon Tel: +93 020 250 0200 1012 Email: najibullah.sarhang@fmic.org.af",
+            "created_on": "2023-07-14T13:58:53.884Z",
+            "status": 1,
+            "excerpt": "From ORM to the DRY principle, learn why Django might just be the trusty sidekick you've been searching for.",
+
+            "categories": "Orthopedics",
+            "updated_on": "2024-05-24T09:43:19.754Z"
+        }
+    },
+    {
+        "model": "blog.post",
+        "pk": null,
+        "fields": {
+            "title": "Dr Shekaib Rahman Behroz",
+            "slug": "",
+            "author": 1,
+            "content": "Medical Specialist/ Diagnostic & Therapeutic Endoscopist Junior DoctorTel: +93 020 250 0200, Ext. 1012Email: Shekaib.Rahman@fmic.org.af",
+            "created_on": "2023-07-14T14:00:47.759Z",
+            "status": 1,
+            "excerpt": "From ORM to the DRY principle, learn why Django might just be the trusty sidekick you've been searching for.",
+            "categories": "Skin",
+            "updated_on": "2023-09-13T09:41:53.636Z"
+        }
+    },
+    {
+        "model": "blog.post",
+        "pk": null,
+        "fields": {
+            "title": "Dr Zubair Ahmad Ramen",
+            "slug": "indenting-my-life-away-musings-of-a-python-newbie",
+            "author": 1,
+            "content": "Junior DoctorTel: +93 020 250 0200, Ext. 1012Email: Zubair.Ahmad@fmic.org.af",
+            "created_on": "2023-07-14T14:01:24.838Z",
+            "status": 1,
+            "excerpt": "Join me on my roller coaster ride through Python development, where each day is a balancing act between triumph and tragedy.",
+            "categories": "Skin",
+            "updated_on": "2023-09-29T12:55:25.717Z"
+        }
+    },
+    {
+        "model": "blog.post",
+        "pk": null,
+        "fields": {
+            "title": "Dr  Hashmatullah Zia",
+            "slug": "the-softer-side-of-code-essential-soft-skills-for-software-developers",
+            "author": 1,
+            "content": "Junior DoctorTel: +93 020 250 0200, Ext. 1012Email: Hashmatullah.Saraj@fmic.org.af",
+            "created_on": "2023-09-04T13:51:34.009Z",
+            "status": 1,
+            "excerpt": "Mastering your IDE and algorithms is important, but there's more to software development than just code. Discover the soft skills that are just as essential for success in the tech industry, from communication to problem-solving.",
+            "categories": "Skin",
+            "updated_on": "2023-09-13T09:31:59.441Z"
+        }
+    }
+  
+    
+]
