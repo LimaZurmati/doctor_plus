@@ -162,3 +162,8 @@ body {
 .approval {
     color: rgb(222, 146, 168);
 }
+
+.avator {
+    height: 40px;
+    width: 40px;
+}

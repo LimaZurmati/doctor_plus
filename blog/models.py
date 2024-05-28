@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 STATUS = ((0, "Draft"), (1, "Published"))
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=25)
+    category_name = models.CharField(max_length=60)
 
     def __str__(self):
         return self.category_name

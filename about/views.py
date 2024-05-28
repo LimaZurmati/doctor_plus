@@ -8,7 +8,8 @@ def about_me(request):
     """
     Renders the About page
     """
-    about = About.objects.all()
+    about = About.objects.all().first()
+   
 
     return render(
         request,
