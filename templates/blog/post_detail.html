@@ -26,7 +26,7 @@
         <!-- Use the | safe filter inside the template tags -->
         <p class="card-text" style=" display: inline-block;">
           {{ post.content | safe }}
-          <h2>Let's collaborate!</h2>
+        
         </p>
       </div>
     </div>
@@ -78,6 +78,10 @@
             Your comment is awaiting approval
           </p>
           {% endif %}
+          {% if user.is_authenticated and comment.author == user %}
+          <button class="fa fa-pencil"
+            comment_id="{{ comment.id }}"></button>
+          {% endif %}
         </div>
         <!-- Our for loop ends here -->
         
@@ -98,6 +102,7 @@
           {% csrf_token %}
           <button id="submitButton" type="submit"
             class="btn btn-signup btn-lg">Comment</button>
+            
         </form>
         {% else %}
         <p>Log in to leave a comment</p>
