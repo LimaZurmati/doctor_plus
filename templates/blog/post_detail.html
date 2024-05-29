@@ -55,10 +55,12 @@
           {% if not comment.approved and comment.author == user %}
           faded{% elif not comment.approved %} d-none{% endif %}">
           <p class="font-weight-bold">
+            <img class="avator avator-sm mr-4" src="{% static 'image/avator.jpg' %}"
+                                            alt="User Avator">
             {{ comment.author }}
             <span class="font-weight-normal">
               {{ comment.created_on }}
-            </span> wrote:
+            </span> commented:
           </p>
           <div id="comment{{ comment.id }}">
             {{ comment.body | linebreaks }}
