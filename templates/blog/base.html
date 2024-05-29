@@ -34,9 +34,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}"><span class="red-o">Doctor</span><span
-                        class="thin">|</span><span
-                        class="red-o">+</span></span></a>
-                       
+                    class="thin">|</span><span class="red-o">+</span></span></a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -47,53 +46,60 @@
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
                             href="{% url 'home' %}">Home</a>
                     </li>
+
+                    {% if user.is_superuser%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">Add Doctor</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == about_url %}active{% endif %}" aria-current="page"
                             href="{% url 'about' %}">About Us</a>
                     </li>
                     {% if user.is_authenticated %}
-<li class="nav-item">
-	<a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>
-</li>
-{% else %}
-<li class="nav-item">
-	<a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
-		href="{% url 'account_signup' %}">Register</a>
-</li>
-<li class="nav-item">
-	<a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{% url 'account_login' %}">Login</a>
-</li>
-{% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page"
+                            href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
+                            href="{% url 'account_signup' %}">SignUp</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page"
+                            href="{% url 'account_login' %}">Login</a>
+                    </li>
+                    {% endif %}
 
                 </ul>
                 <span class="navbar-text text-muted">
-                    Where Your Hearth Beath
+                    {% if user.is_authenticated %}
+                    <p class="text-end m-3">logged as admin: {{ user }}</p>
+                    {% else %}
+                    <p class="text-end m-3">You are not logged in</p>
+                    {% endif %}
                 </span>
             </div>
         </div>
     </nav>
     <!-- displaying  messages for  comment -->
-<div class="container">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        {% for message in messages %}
-        <div class="alert {{ message.tags }} alert-dismissible
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible
           fade show" id="msg" role="alert">
-          {{ message | safe }}
-          <button type="button" class="btn-close"
-            data-bs-dismiss="alert" aria-label="Close"></button>
+                    {{ message | safe }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-        {% endfor %}
-      </div>
     </div>
-  </div>
 
     <main class="flex-shrink-0 main-bg">
-        {% if user.is_authenticated %}
-        <p class="text-end m-3">You are logged in as {{ user }}</p>
-        {% else %}
-        <p class="text-end m-3">You are not logged in</p>
-        {% endif %}
+
 
         {% block content %}
         <!-- Content Goes here -->
@@ -104,11 +110,15 @@
     <!-- Footer -->
     <footer class="footer mt-auto py-3 dark-bg">
         <p class="m-0 text-center text-white">&copy;2024 Doctor + | Privacy Policy</p>
-        <p class="m-0 text-center text-white">Follow us: 
-            <a href="https://facebook.com"style="color:white; margin-left:5px;"><i class="fab fa-facebook-square ms-3"></i></a>
-            <a href="https://twitter.com" style="color:white; margin-left:5px;"><i class="fab fa-twitter-square ms-3"></i></a>
-            <a href="https://instagram.com"style="color:white; margin-left:5px;"><i class="fab fa-instagram-square ms-3"></i></a>
-            <a href="https://youtube.com"style="color:white; margin-left:5px;"><i class="fab fa-youtube-square ms-3"></i></a>
+        <p class="m-0 text-center text-white">Follow us:
+            <a href="https://facebook.com" style="color:white; margin-left:5px;"><i
+                    class="fab fa-facebook-square ms-3"></i></a>
+            <a href="https://twitter.com" style="color:white; margin-left:5px;"><i
+                    class="fab fa-twitter-square ms-3"></i></a>
+            <a href="https://instagram.com" style="color:white; margin-left:5px;"><i
+                    class="fab fa-instagram-square ms-3"></i></a>
+            <a href="https://youtube.com" style="color:white; margin-left:5px;"><i
+                    class="fab fa-youtube-square ms-3"></i></a>
         </p>
 
 
@@ -117,8 +127,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
-        </script>
-        
+    </script>
+
 </body>
 
 </html>
