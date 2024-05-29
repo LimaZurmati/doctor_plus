@@ -33,6 +33,19 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.title} | written by {self.author}"
 
+
+class ContactRequest(models.Model):
+    name = models.CharField(max_length=200)
+    gender = models.TextField()
+    age = models.IntegerField()
+    email = models.EmailField()
+    message = models.TextField()
+    read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Collaboration request from {self.name}"
+
+
 class Comment(models.Model):    
     post = models.ForeignKey(
     Post, on_delete=models.CASCADE, related_name="comments")
