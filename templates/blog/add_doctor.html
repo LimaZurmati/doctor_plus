@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+{% block content %}
+{% load static %}
+
+<h3 class=" mt-5 text-center" style="color:hsl(15, 83%, 65%);">Add New Doctor</h3>
+<br>
+<div class="container">
+    <div class="col-lg-8 mt-3 mx-auto">
+        <div class="form-group">
+            <form method="POST"  enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media}}
+                {{ form.as_p}}
+                <button class="btn btn-signup right" type="submit">Add Post</button>
+                <br> <br>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

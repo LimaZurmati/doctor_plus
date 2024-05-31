@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404, reverse
+from django.urls import reverse_lazy
 from django.views import generic, View
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Post, Comment
-from .forms import CommentForm
+from .forms import CommentForm, AddDoctorForm
+from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 #from .forms import ContactForm
 
 # Create your views here.
@@ -68,7 +71,7 @@ def comment_edit(request, slug, comment_id):
         else:
             messages.add_message(request, messages.ERROR, 'Error updating comment!')
 
-    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+    return HttpResponseRedirect(reverse('blog/post_detail', args=[slug]))
 
 
 def comment_delete(request, slug, comment_id):
@@ -85,9 +88,27 @@ def comment_delete(request, slug, comment_id):
     else:
         messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
 
-    return HttpResponseRedirect(reverse('post_detail', args=[slug]))    
+    return HttpResponseRedirect(reverse('blog/post_detail', args=[slug]))    
                     
-                
-      
+
+
+
+class AddNewDoctor(UserPassesTestMixin, LoginRequiredMixin, CreateView):
+    model = Post
+    template_name = 'blog/add_doctor.html'
+    form_class = AddDoctorForm
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        author = Author.objects.get(user=self.request.user)
+        form.instance.author = author
+        form.save()
+        return super().form_valid(form)
+
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_superuser
+
+    def handle_no_permission(self):
+        return HttpResponse("You are not an admin.")
 
 
