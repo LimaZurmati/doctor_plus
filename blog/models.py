@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
@@ -15,19 +16,6 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
-class Author(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image = CloudinaryField('image', default='placeholder')
-
-    def __str__(self):
-        return self.user.username
-
-
-
-
-
-
-
 
 
 
@@ -40,7 +28,7 @@ class Post(models.Model):
         User, on_delete=models.CASCADE, related_name="blog_posts"
     )
     
-    doctor_image = CloudinaryField('image', default='placeholder')
+    doctor_image = CloudinaryField('image', default='placeholder', blank=False)
     #nationality = models.TextField()
     #service = models.CharField(max_length=200, unique=True)
     content = models.TextField()
@@ -80,3 +68,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment {self.body} by {self.author}" 
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)    
+        super(Post,self).save(*args, **kwargs)    

@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% block content %}
+{% load crispy_forms_tags %}
 {% load static %}
   
 <h3 class=" mt-5 text-center" style="color:hsl(15, 83%, 65%);">Add New Doctor</h3>
@@ -9,8 +10,9 @@
         <div class="form-group">
             <form method="POST"  enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.media}}
-                {{ form.as_p}}
+                {{ adddoctorform.media}}
+                {{ adddoctorform | crispy}}
+                
                 <button class="btn btn-signup right" type="submit" href>Add Doctor</button>
                 <br> <br>
 

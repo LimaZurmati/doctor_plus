@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views import generic, View
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Post, Comment, Author
+from .models import Post, Comment
 from .forms import CommentForm, AddDoctorForm
 from .forms import ModelForm
 from django.views.generic.edit import CreateView
@@ -17,10 +17,13 @@ def add_doctor(request):
     adddoctorform = AddDoctorForm()  # Define the form with a default value
 
     if request.method == 'POST':
-        adddoctorform = AddDoctorForm(request.POST)
+        adddoctorform = AddDoctorForm(request.POST, request.FILES)
         if adddoctorform.is_valid():
-            adddoctorform.save()
-            message.success(request, "Doctor added successfully!")
+            new_doctor = adddoctorform.save(commit=False)
+            new_doctor.author = request.user
+            print(new_doctor.slug)
+            new_doctor.save()
+            messages.success(request, "Doctor added successfully!")
             return redirect('home')
     
     context = {
@@ -112,16 +115,5 @@ def comment_delete(request, slug, comment_id):
     return HttpResponseRedirect(reverse('blog/post_detail', args=[slug]))    
                     
 
-
-
-def add_doctor(request):
-    if request.method == 'POST':
-        form = AddDoctorForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('post_detail')  # Redirect to the doctor list page
-    else:
-        form = AddDoctorForm()
-    return render(request, 'add_doctor.html', {'form': form})
 
 
