@@ -3,13 +3,34 @@ from django.urls import reverse_lazy
 from django.views import generic, View
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Post, Comment
+from .models import Post, Comment, Author
 from .forms import CommentForm, AddDoctorForm
+from .forms import ModelForm
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 #from .forms import ContactForm
 
 # Create your views here.
+
+
+def add_doctor(request):
+    adddoctorform = AddDoctorForm()  # Define the form with a default value
+
+    if request.method == 'POST':
+        adddoctorform = AddDoctorForm(request.POST)
+        if adddoctorform.is_valid():
+            adddoctorform.save()
+            message.success(request, "Doctor added successfully!")
+            return redirect('home')
+    
+    context = {
+        'adddoctorform': AddDoctorForm,
+    } 
+
+    return render(request, 'blog/add_doctor.html', context)    
+
+
+
 class DoctorList(generic.ListView):
     queryset = Post.objects.filter(status=1)
     template_name = "blog/index.html"
@@ -93,22 +114,14 @@ def comment_delete(request, slug, comment_id):
 
 
 
-class AddNewDoctor(UserPassesTestMixin, LoginRequiredMixin, CreateView):
-    model = Post
-    template_name = 'blog/add_doctor.html'
-    form_class = AddDoctorForm
-    success_url = reverse_lazy('home')
-
-    def form_valid(self, form):
-        author = Author.objects.get(user=self.request.user)
-        form.instance.author = author
-        form.save()
-        return super().form_valid(form)
-
-    def test_func(self):
-        return self.request.user.is_authenticated and self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        return HttpResponse("You are not an admin.")
+def add_doctor(request):
+    if request.method == 'POST':
+        form = AddDoctorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail')  # Redirect to the doctor list page
+    else:
+        form = AddDoctorForm()
+    return render(request, 'add_doctor.html', {'form': form})
 
 

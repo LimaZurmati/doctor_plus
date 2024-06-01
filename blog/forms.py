@@ -1,6 +1,7 @@
+from django import forms
+from django.forms import ModelForm
 from .models import Comment, Post
 from .models import ContactRequest
-from django import forms
 from django_summernote.widgets import SummernoteWidget
 
 class ContactForm(forms.ModelForm):
@@ -15,23 +16,22 @@ class CommentForm(forms.ModelForm):
         fields = ('body',)
 
 
+      
+
 class AddDoctorForm(forms.ModelForm):
-    
-    content = forms.CharField(widget=SummernoteWidget())
+    content = forms.CharField(widget=SummernoteWidget())    
 
     class Meta:
         model = Post
-        fields = (
-            'title', 'doctor_image',
-            'content', 'categories', 'status')
+        fields = ['title',  'doctor_image', 'content', 'categories', 'status']
+    
 
-        widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'content': forms.Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Write content here ...',
-            }),
-            'categories': forms.SelectMultiple(
-                                attrs={'class': 'form-select'}),
-            'status': forms.Select(attrs={'class': 'form-control'}),
-        }        
+widgets = {
+    'title': forms.TextInput(attrs={'class': 'form-control'}),
+    'content': forms.Textarea(attrs={
+        'class': 'form-control',
+        'placeholder': 'Write content here ...',
+    }),
+    'categories': forms.SelectMultiple(attrs={'class': 'form-select'}),
+    'status': forms.Select(attrs={'class': 'form-control'}),
+}
