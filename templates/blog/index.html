@@ -23,11 +23,12 @@
                                 {% endif %}
                               
                             </div>
-                            <a href="{% url 'post_detail' slug=post.slug %}" class="post-link"></a>
+                            <a href="{% url 'post_detail' slug=post.slug %}" class="post-link">
                                 <h2 class="card-title">{{ post.title }}</h2>
                                 
                             </a>
-                            <p class="card-text">{{  post.categories.all.0 }} |</p>
+                            
+                            <p class="category-name"><span class="c-color">|</span>{{ post.categories.all.0}}</p>
 
                             <hr />
                             <p class="card-text text-muted h6">{{ post.created_on}}

@@ -17,9 +17,17 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
 
+""" class Language(models.Model):
+    name = models.CharField(max_length=60)
 
+    def __str__(self):
+        return self.name
 
+    class Meta:
+        verbose_name = 'Language'
+        verbose_name_plural = 'Languages'
 
+"""
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
@@ -29,11 +37,13 @@ class Post(models.Model):
     )
     
     doctor_image = CloudinaryField('image', default='placeholder', blank=False)
-    #nationality = models.TextField()
-    #service = models.CharField(max_length=200, unique=True)
+    #nationality = models.CharField(max_length=100, null=True)
+    #service = models.CharField(max_length=200)
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     categories = models.ManyToManyField(Category)
+    #languages_spoken = models.ManyToManyField(Language)
+    #email = models.EmailField(max_length=254, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
     updated_on = models.DateTimeField(auto_now=True)
     class Meta:
@@ -41,6 +51,11 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.title} | written by {self.author}"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)    
+        super(Post,self).save(*args, **kwargs)   
 
 
 class ContactRequest(models.Model):
@@ -69,7 +84,4 @@ class Comment(models.Model):
     def __str__(self):
         return f"Comment {self.body} by {self.author}" 
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)    
-        super(Post,self).save(*args, **kwargs)    
+     

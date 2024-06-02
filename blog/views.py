@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.urls import reverse_lazy
 from django.views import generic, View
 from django.contrib import messages
@@ -38,7 +38,6 @@ class DoctorList(generic.ListView):
     queryset = Post.objects.filter(status=1)
     template_name = "blog/index.html"
     paginate_by = 6
-
 
 def post_detail(request, slug):
 
