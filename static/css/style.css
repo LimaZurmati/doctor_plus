@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
 body {
     background-color: #F9FAFC;
 }
@@ -168,4 +174,15 @@ body {
     width: 40px;
 }
 
+
+
+
+@media only screen and (max-width: 600px) {
+      #id_content_iframe {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    
 
