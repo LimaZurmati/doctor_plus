@@ -11,6 +11,9 @@
         <h1 class="post-title">{{ post.title }}</h1>
         <!-- Post author goes before the | the post's created date goes after -->
         <p class="post-subtitle">{{  post.categories.all.0 }} | {{ post.created_on }}</p>
+        <p class="post-subtitle">Contact information: {{  post.email }}</p>
+                           
+    
       </div>
       <div class="d-none d-md-block col-md-6 masthead-image">
         <img class="card-img-top" src=" {{ post.doctor_image.url }}" alt="{{ post.title }}">

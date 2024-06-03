@@ -23,7 +23,7 @@ class AddDoctorForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'doctor_image', 'content', 'categories', 'status']
+        fields = ['title', 'email', 'service', 'doctor_image', 'content', 'categories', 'status']
     
 
 widgets = {

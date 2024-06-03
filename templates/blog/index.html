@@ -23,16 +23,26 @@
                                 {% endif %}
                               
                             </div>
-                            <a href="{% url 'post_detail' slug=post.slug %}" class="post-link">
-                                <h2 class="card-title">{{ post.title }}</h2>
-                                
-                            </a>
-                            
-                            <p class="category-name"><span class="c-color">|</span>{{ post.categories.all.0}}</p>
+                       
+                            <div class="card-body mt-3">
 
+                                <a href="{% url 'post_detail' slug=post.slug %}" class="post-link">
+                                    <h2 class="card-title">{{ post.title }}</h2>
+                                    <p class="card-text"  style=" display: inline-block"><h4>Service: {{  post.service }} </h4></p>
+                                </a>
+                                
+                              </div>
+                            
+                            
+                            <br>
+                            <p class="category-name"><span class="c-color">|</span>{{ post.categories.all.0}}</p>
+                             
+                   
                             <hr />
-                            <p class="card-text text-muted h6">{{ post.created_on}}
+                            <p class="card-text text-muted h6">{{ post.created_on}}| Contact information: {{ post.email }}
                             </p>
+                           
+                          
                         </div>
                     </div>
                 </div>
