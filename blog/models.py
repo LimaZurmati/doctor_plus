@@ -17,7 +17,7 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
 
-""" class Language(models.Model):
+class Language(models.Model):
     name = models.CharField(max_length=60)
 
     def __str__(self):
@@ -27,7 +27,6 @@ class Category(models.Model):
         verbose_name = 'Language'
         verbose_name_plural = 'Languages'
 
-"""
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
@@ -37,13 +36,13 @@ class Post(models.Model):
     )
     
     doctor_image = CloudinaryField('image', default='placeholder', blank=False)
-    #nationality = models.CharField(max_length=100, null=True)
-    #service = models.CharField(max_length=200)
+    nationality = models.CharField(max_length=100, null=True)
+    service = models.CharField(max_length=200, null=True)
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     categories = models.ManyToManyField(Category)
-    #languages_spoken = models.ManyToManyField(Language)
-    #email = models.EmailField(max_length=254, blank=True)
+    languages_spoken = models.ManyToManyField(Language)
+    email = models.EmailField(max_length=254, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
     updated_on = models.DateTimeField(auto_now=True)
     class Meta:
