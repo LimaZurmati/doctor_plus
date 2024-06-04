@@ -30,7 +30,7 @@ class Post(models.Model):
     service = models.CharField(max_length=200, null=True)
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    categories = models.ManyToManyField(Category)
+    categories = models.ForeignKey(Category, on_delete=models.CASCADE, default="General Surgery")
     email = models.EmailField(max_length=254, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
     updated_on = models.DateTimeField(auto_now=True)

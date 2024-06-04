@@ -16,7 +16,7 @@ def add_doctor(request):
         if adddoctorform.is_valid():
             new_doctor = adddoctorform.save(commit=False)
             new_doctor.author = request.user
-            new_doctor.slug = new_doctor.full_name.replace(" ", "-").lower()
+            new_doctor.slug = new_doctor.title.replace(" ", "-").lower()
             new_doctor.save()
             messages.success(request, "Doctor added successfully!")
             return redirect('home')

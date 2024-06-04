@@ -26,12 +26,12 @@ class AddDoctorForm(forms.ModelForm):
         fields = ['title', 'email', 'service', 'doctor_image', 'content', 'categories', 'status']
     
 
-widgets = {
-    'title': forms.TextInput(attrs={'class': 'form-control'}),
-    'content': forms.Textarea(attrs={
-        'class': 'form-control',
-        'placeholder': 'Write content here ...',
-    }),
-    'categories': forms.SelectMultiple(attrs={'class': 'form-select'}),
-    'status': forms.Select(attrs={'class': 'form-control'}),
-}
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'content': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Write content here ...',
+            }),
+            #'categories': forms.SelectMultiple(attrs={'class': 'form-select'}),
+            'status': forms.Select(attrs={'class': 'form-control'}),
+        }

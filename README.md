@@ -61,7 +61,7 @@ ___
 
 - Log in and Log out of their account.
 - Read blog posts and comments on each post.
-- Add their own comments on blog posts can delte and update the comment.
+- Add their own comments on blog posts can delete and update the comment.
 
 ___
 ### _User Stories_
@@ -323,8 +323,8 @@ All code passed without errors.
 
 ## Bugs
 
-I created model for language but it did not shows at database so, I delted and I will work on it after.
-also the add doctor form do not save the category feild.
+I created model for language but it did not shows at database so, I deleted and I will work on it after.
+
 
 
 
@@ -389,7 +389,7 @@ I have to Acknowledgement that the Code Institute LMS, in particular the CI I Th
 2. Django Documentation
 3. Stack Overflow
 4. W3Schools
-5. for doctor information the data is fake, so it need research to find expert doctor.In addition, I take this informaton from socil media.
+5. for doctor information it need research to find expert doctor.In addition, I take this informaton from this site (https://www.amc.com.af/doctor/manizha-qarizada-amc)
 
 for add doctor I watched[youtube](https://www.youtube.com)
 
