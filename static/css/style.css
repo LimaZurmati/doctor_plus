@@ -38,6 +38,9 @@ body {
 .card {
     border: none;
     background-color: transparent;
+    height: auto;
+    width: 90%;
+
 }
 .c-color {
     color: #d83c08;

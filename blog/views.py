@@ -8,44 +8,40 @@ from .forms import CommentForm, AddDoctorForm
 from .forms import ModelForm
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-#from .forms import ContactForm
 
-# Create your views here.
-
-
+"""Class add_doctor"""
 def add_doctor(request):
-    adddoctorform = AddDoctorForm()  # Define the form with a default value
-
     if request.method == 'POST':
         adddoctorform = AddDoctorForm(request.POST, request.FILES)
         if adddoctorform.is_valid():
             new_doctor = adddoctorform.save(commit=False)
             new_doctor.author = request.user
-            print(new_doctor.slug)
+            new_doctor.slug = new_doctor.full_name.replace(" ", "-").lower()
             new_doctor.save()
             messages.success(request, "Doctor added successfully!")
             return redirect('home')
-    
+    else:
+        adddoctorform = AddDoctorForm()
+
     context = {
-        'adddoctorform': AddDoctorForm,
-    } 
+        'adddoctorform': adddoctorform
+    }
 
-    return render(request, 'blog/add_doctor.html', context)    
+    return render(request, 'blog/add_doctor.html', context)
 
-
-
+"""Class DoctorList"""
 class DoctorList(generic.ListView):
     queryset = Post.objects.filter(status=1)
     template_name = "blog/index.html"
     paginate_by = 6
 
+"""Class post_details"""
 def post_detail(request, slug):
-
-
     queryset = Post.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
     comments = post.comments.all().order_by("-created_on")
     comment_count = post.comments.filter(approved=True).count()
+
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -53,13 +49,9 @@ def post_detail(request, slug):
             comment.author = request.user
             comment.post = post
             comment.save()
-            messages.add_message(
-            request, messages.SUCCESS,
-        'Comment posted and awaiting approval'
-
-    )
-            
-    comment_form = CommentForm()
+            messages.add_message(request, messages.SUCCESS, 'Comment posted and awaiting approval')
+    else:
+        comment_form = CommentForm()
 
     return render(
         request,
@@ -68,18 +60,13 @@ def post_detail(request, slug):
             "post": post,
             "comments": comments,
             "comment_count": comment_count,
-            "comment_form": comment_form,
-            #"contact_form": contact_form,
-        
-        },    
+            "comment_form": comment_form
+        }
     )
 
+"""Comment Edit"""
 def comment_edit(request, slug, comment_id):
-    """
-    view to edit comments
-    """
     if request.method == "POST":
-
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
         comment = get_object_or_404(Comment, pk=comment_id)
@@ -94,13 +81,10 @@ def comment_edit(request, slug, comment_id):
         else:
             messages.add_message(request, messages.ERROR, 'Error updating comment!')
 
-    return HttpResponseRedirect(reverse('blog/post_detail', args=[slug]))
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
-
+"""Comment Delete"""
 def comment_delete(request, slug, comment_id):
-    """
-    view to delete comment
-    """
     queryset = Post.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
     comment = get_object_or_404(Comment, pk=comment_id)
@@ -111,8 +95,4 @@ def comment_delete(request, slug, comment_id):
     else:
         messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
 
-    return HttpResponseRedirect(reverse('blog/post_detail', args=[slug]))    
-                    
-
-
-
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
