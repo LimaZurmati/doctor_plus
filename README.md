@@ -14,15 +14,15 @@ Link to live site - [https://doctor-plus-7e2178eca57a.herokuapp.com/](https://do
 
 ## CONTENTS
 
-- [](#Doctor_ Plus)
-  - [CONTENTS](#contents)
+- [Doctor | +](#Doctor-Plus)
+- [CONTENTS](#contents)
 - [User Experience/UX](#user-experienceux)
   - [Target Audience](#target-audience)
   - [User Stories](#user-stories)
     - [New Users Goals](#new-visitor-goals)
     - [Existing Users Goals](#existing-visitor-goals)
   - [Wireframes](#wireframes)
-  - [Flow Diagram](#flow-diagram)## Site Objectives
+  - [Flow Diagram](#flow-diagram)
    - [Database Plan](#database-plan)
 - [Features](#features)
   - [Registration](#registration)
@@ -47,7 +47,7 @@ ___
 
 ## Target Audience
 
-- Users that are looking for expert doctors,they can easily find information about doctor and read patient feedbck.
+- Users that are looking for expert doctors,they can easily find information about doctor and read patient feedback.
 
 ## User Stories
 
