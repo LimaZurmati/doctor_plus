@@ -3,11 +3,11 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
-
+# Status choices for posts
 STATUS = ((0, "Draft"), (1, "Published"))
 
-"""Category model"""
 class Category(models.Model):
+    """Category model"""
     category_name = models.CharField(max_length=60)
 
     def __str__(self):
@@ -17,20 +17,20 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
-"""Post Model"""
+
 class Post(models.Model):
+    """Post model"""
     title = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True)  # Allow blank for slug
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts"
     )
-
     doctor_image = CloudinaryField('image', default='placeholder', blank=False)
     nationality = models.CharField(max_length=100, null=True)
     service = models.CharField(max_length=200, null=True)
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    categories = models.ForeignKey(Category, on_delete=models.CASCADE, default="General Surgery")
+    categories = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)  # Ensure a default ID
     email = models.EmailField(max_length=254, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
     updated_on = models.DateTimeField(auto_now=True)
@@ -46,10 +46,11 @@ class Post(models.Model):
             self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 
-""" ContactRequest Model"""
+
 class ContactRequest(models.Model):
+    """ContactRequest model"""
     name = models.CharField(max_length=200)
-    gender = models.TextField()
+    gender = models.CharField(max_length=10)  # Changed to CharField for better control
     age = models.IntegerField()
     email = models.EmailField()
     message = models.TextField()
@@ -58,8 +59,9 @@ class ContactRequest(models.Model):
     def __str__(self):
         return f"Collaboration request from {self.name}"
 
-""" Comment Model"""
+
 class Comment(models.Model):
+    """Comment model"""
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name="comments"
     )
@@ -74,4 +76,4 @@ class Comment(models.Model):
         ordering = ["created_on"]
 
     def __str__(self):
-        return f"Comment {self.body} by {self.author}"
+        return f"Comment {self.body[:20]}... by {self.author}"  # Show only the first 20 characters
