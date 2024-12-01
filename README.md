@@ -274,12 +274,56 @@ Here are the technologies used for this project:
 
 
 ## Testng
-The portal has been well tested and the results can be viewed
-[here - Manual Testing](https://github.com/LimaZurmati/doctor_plus/blob/main/TESTING.md)
+*For any Fails, there is a more detailed description below the table*
+
+ADMIN
+| TEST | OUTCOME | PASS/FAIL|
+|:---:|:---:|:---:|
+| Add doctor | doctor successfully added and displayed | Pass |
+
+(*) - While testing the ability to add doctor(Limited to Admin only).
+
+## User
+
+| TEST | OUTCOME | PASS/FAIL|
+|:---:|:---:|:---:|
+| Create Account | Created successfully | Pass |
+| Login | Login Successful | Pass |
+| Logout | Logout Successful | Pass |
+| Read Full Blog Post | PostDetail page loaded successfully | Pass |
+| Add Comment under Blogpost | Comment Added Successfully | Pass |
+| Delete Comment | Comment Deleted | Pass |
+| Edit Comment | Comment Upadted| Pass |
+| Filter Posts by category |Under each post, there is a category that users can select via that category | Pass |
+| Users can see the 'About' page| and it loaded successfully| Pass |
+ 
+## Lighthouse
+
+The performance scores seem to be low, and I suspect this is because the images for each blog post are hosted on a third-party cloud platform.
+
+Mobile
+
+![Lighthouse Mobile Score](/static/image/moble.PNG)
+
+Desktop
+
+![Lighthouse Desktop Score](/static/image/desctop.PNG)
+
+## Validation Testing
+
+### HTML & CSS
+
+HTML & CSS testing was completed using [W3 Validator](https://validator.w3.org/)
+
+When validating the code, I had the error shown below. this was fixed by removing the button and using Bootstrap styles to display the link as a button instead
+
+![HTML Validation base.html](/static/image/html.PNG)
+
 ### CI Python Linter 
 
 ## Python Testing
 Python Files Tested:
+Python pep8 validation was done via [Code Institute's Python Linter](https://pep8ci.herokuapp.com/)
 
 - models
 - forms
@@ -323,7 +367,7 @@ All code passed without errors.
 
 ## Bugs
 
-I created model for language but it did not shows at database so, I deleted and I will work on it after.
+I created a model for the language, but it did not appear in the database, so I deleted it and will revisit it later.
 
 
 
@@ -331,7 +375,14 @@ I created model for language but it did not shows at database so, I deleted and 
 ## Deployment
 
 ### Github Deployment
+The website's data and version control were managed using GitHub. To accomplish this, I followed these steps:
 
+After every addition, modification, or deletion of code, I would enter the following commands in the terminal of my IDE (I used Gitpod):
+
+git add .
+git commit -m "meaningful commit message"
+git push
+Now, the files are accessible in my GitHub repository.
 ## __Deployment__
 
 ### **Create a Database**
@@ -345,7 +396,7 @@ These steps will create a PostgreSQL database:
 7. Check your details are correct and then click "Create instance"
 8. Return to the ElephantSQL dashboard and click on the database instance name for this project
 9. In the URL section, click the copy icon to copy the database URL
-
+___
 
 After each addition, change or removal of code, in the terminal within your IDE (I used gitpod for this project) type:
 
@@ -355,7 +406,7 @@ After each addition, change or removal of code, in the terminal within your IDE 
 
 The files are now available to view within my github repository.
 
-
+___
 ### Repository deployment via Heroku
 
 ### **Heroku**
@@ -402,7 +453,7 @@ ___
 
 ## Media
 
-All other images are taken from Amiry Hosptal my own.
+All other images are sourced from the Amiriy Hospital's doctors' dashboard.
 
 ___
 
