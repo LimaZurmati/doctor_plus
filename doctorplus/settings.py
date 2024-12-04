@@ -26,7 +26,7 @@ TEMPLATES_DIR = BASE_DIR / 'templates'
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # Set DEBUG to True for development
+DEBUG = False  # Set DEBUG to True for development
 
 ALLOWED_HOSTS = ['8000-limazurmati-doctorplus-cw2mw3jzhax.ws.codeinstitute-ide.net', '.herokuapp.com']
 
@@ -142,4 +142,3 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-APPEND_SLASH = False
