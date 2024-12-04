@@ -1,3 +1,5 @@
+from django.core.exceptions import ValidationError  # Import ValidationError
+from django.utils.translation import gettext_lazy as _  # Import translation function
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
@@ -45,6 +47,12 @@ class Post(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
+
+    def clean(self):
+        # Validate title for invalid characters
+        invalid_chars = ['.', ',', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')']
+        if any(char in self.title for char in invalid_chars):
+            raise ValidationError(_('Title cannot contain special characters like ".", ",", etc.'))
 
 
 class ContactRequest(models.Model):
