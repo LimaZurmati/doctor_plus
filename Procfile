@@ -1,1 +1,1 @@
-web: gunicorn doctor123.wsgi
+web: gunicorn doctorplus.wsgi
